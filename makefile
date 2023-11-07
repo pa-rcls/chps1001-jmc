@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++17
 SRC_DIR = src/sources
 INC_DIR = src/headers
 
-SRC = $(SRC_DIR)/fcts.cpp main.cpp
+SRC = $(SRC_DIR)/Atom.cpp $(SRC_DIR)/fcts.cpp $(SRC_DIR)/groReader.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 EXE = LipidX
 
