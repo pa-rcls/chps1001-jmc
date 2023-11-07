@@ -5,7 +5,7 @@ INC_DIR = src/headers
 
 SRC = $(SRC_DIR)/fcts.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
-EXE = myprogram
+EXE = LipidX
 
 all: $(EXE)
 

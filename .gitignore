@@ -1,0 +1,5 @@
+# Ignore les fichiers objets générés par la compilation
+*.o
+
+# Ignore les fichiers exécutables générés
+LipidX
