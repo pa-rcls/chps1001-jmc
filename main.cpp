@@ -4,6 +4,7 @@
 
 #include "src/headers/fcts.h"
 #include "src/headers/groReader.h"
+#include "src/headers/garfieldSolver.h"
 //#include "src/headers/Atom.h"
 
 
@@ -29,6 +30,8 @@ int main(int argc, char* argv[]) {
 
     atoms[randomIndex].show();
     // Utilisez les données lues à partir du fichier .gro dans votre analyse de la structure des membranes lipidiques
-
+    garfield garf;
+    garf.numSlices = 5;
+    GarfieldLoop(garf,atoms);
     return 0;
 }

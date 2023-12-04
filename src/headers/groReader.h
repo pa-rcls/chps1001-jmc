@@ -5,6 +5,8 @@
 #include <vector>
 #include "Atom.h"
 
-std::vector<Atom> readGroFile(const std::string& filename);
+using namespace std;
+
+vector<Atom> readGroFile(const string& filename); //Read .gro file and creating vector of atom
 
 #endif
