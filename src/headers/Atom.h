@@ -3,12 +3,13 @@
 
 #include <string>
 
+using namespace std;
+
 struct Atom {
-    std::string name;
-    std::string atomType;
+    string name;
+    string atomType;
     int id;
-    double x, y, z;
-    double extra1, extra2, extra3;
+    float x, y, z;
 
     void show();
 };
