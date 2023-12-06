@@ -30,8 +30,10 @@ int main(int argc, char* argv[]) {
 
     atoms[randomIndex].show();
     // Utilisez les données lues à partir du fichier .gro dans votre analyse de la structure des membranes lipidiques
-    garfield garf;
-    garf.numSlices = 5;
-    GarfieldLoop(garf,atoms);
+    //garfield garf;
+    //garf.numSlices = 5;
+    //GarfieldLoop(garf,atoms);
+
+    writeAtomPositionsToFile(atoms, "positionatoms.txt");
     return 0;
 }
