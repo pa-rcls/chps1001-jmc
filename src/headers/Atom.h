@@ -4,7 +4,7 @@
 #include <string>
 #include <iomanip> 
 #include <fstream> 
-
+#include "calcul.h"
 using namespace std;
 
 struct Atom {

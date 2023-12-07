@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <cstdlib>
+
 
 #include "src/headers/fcts.h"
 #include "src/headers/groReader.h"
@@ -36,28 +38,13 @@ int main(int argc, char* argv[]) {
     // garfield garf;
     // garf.numSlices = 5;
     // GarfieldLoop(garf,atoms);
+    // Utilisez la fonction createMoleculesFromAtoms pour obtenir un vecteur de molécules
+    std::vector<Molecule> allMolecules = createMoleculesFromAtoms(atoms);
 
-    // Déclaration des variables pour les molécules et les atomes
-    std::vector<Molecule> allMolecules;
-    // Initialisez allMolecules en lisant les données à partir du fichier ou d'une autre source
-
-    std::vector<Atom> allAtoms = readGroFile(groFileName);
-
-    // Création d'une instance de Bilayer
-    Bilayer bilayer;
-
-    // Appel de la fonction d'algorithme
-    processMolecules(bilayer, allMolecules, allAtoms);
-
-    // Affichage des molécules dans les parties Upper et Lower de la bilaye
-    std::cout << "Upper Leaflet:" << std::endl;
-    bilayer.printUpperLeaflet();
-
-    std::cout << "\nLower Leaflet:" << std::endl;
-    bilayer.printLowerLeaflet();
-
-    // Écriture des positions des atomes dans un fichier
-    writeAtomPositionsToFile(atoms, "positionatoms.txt");
-
+    // Affichez les noms des molécules
+    for (const auto& molecule : allMolecules) {
+        std::cout << "Molecule Name: " << molecule.getName() << std::endl;
+    }
+    
     return 0;
 }
