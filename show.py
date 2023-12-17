@@ -1,5 +1,7 @@
+import matplotlib
+matplotlib.use('TkAgg')  # Utilisez un backend adapté à votre environnement
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+
 
 def read_atom_positions(file_path):
     positions = []

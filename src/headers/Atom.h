@@ -4,10 +4,10 @@
 #include <string>
 #include <iomanip> 
 #include <fstream> 
-#include "calcul.h"
+
 using namespace std;
 
-struct Atom {
+struct Atom{
     string name;
     string atomType;
     int id;
