@@ -43,6 +43,9 @@ int main(int argc, char* argv[]) {
 	
 	graph_t graph;
 	init_graph(&graph, argv[1]);
+	
+	check_solution(&graph.layer1, &graph.layer2, argv[1]);
+	
 	free_graph(&graph);
 	
 	double tock = clock();
