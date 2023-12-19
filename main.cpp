@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     // GarfieldLoop(garf,atoms);
 	// double tock = clock();
 	// cout << "Garfield : " << (tock-tick)/CLOCKS_PER_SEC << endl;
-	
+	solveurmolecule(atoms);
 	double tick = clock();
 	
 	graph_t graph;

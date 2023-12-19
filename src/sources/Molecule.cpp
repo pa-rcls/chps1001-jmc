@@ -208,3 +208,60 @@ void assignFeuilletValues(std::vector<Molecule>& molecules) {
         }
     }
 }
+
+void solveurmolecule(const std::vector<Atom>& atoms){
+       vector<Molecule> allMolecules;
+    // Appelez la fonction avec le vecteur par référence
+    createMoleculesFromAtoms(atoms, allMolecules);
+
+    assignFeuilletValues(allMolecules);
+    // Affichez les paramètres de quelques molécules
+    for (size_t i = 0; i < std::min(allMolecules.size(), static_cast<size_t>(10)); ++i) {
+        const Molecule& molecule = allMolecules[i];
+        std::cout << "Molecule Name: " << molecule.name << std::endl;
+        std::cout << "Molecule Feuillet: " << molecule.feuillet << std::endl;
+        std::cout << "Molecule ID: " << molecule.moleculeId << std::endl;
+        std::cout << "Molecule Atoms Reference: " << molecule.atomRef.name << " pos x: " << molecule.atomRef.pos.x  << " pos y: " << molecule.atomRef.pos.y  << " pos z: " << molecule.atomRef.pos.z << std::endl;
+        std::cout << "Molecule Orientation: " << molecule.orientation<< std::endl;
+
+        // Affichez le centre de masse de la molécule
+        Vector3D temp = molecule.centerOfMass;
+        std::cout << "Molecule Center of Mass pos : x " << temp.x << " y : " << temp.y << " z : " << temp.z << std::endl;
+
+        std::cout << "------------------------" << std::endl;
+    }
+
+
+      const Molecule& molecule = allMolecules[900];
+        std::cout << "Molecule Name: " << molecule.name << std::endl;
+        std::cout << "Molecule Feuillet: " << molecule.feuillet << std::endl;
+        std::cout << "Molecule ID: " << molecule.moleculeId << std::endl;
+        std::cout << "Molecule Atoms Reference: " << molecule.atomRef.name << " pos x: " << molecule.atomRef.pos.x  << " pos y: " << molecule.atomRef.pos.y  << " pos z: " << molecule.atomRef.pos.z << std::endl;
+        std::cout << "Molecule Orientation: " << molecule.orientation<< std::endl;
+
+        // Affichez le centre de masse de la molécule
+        Vector3D temp = molecule.centerOfMass;
+        std::cout << "Molecule Center of Mass pos : x " << temp.x << " y : " << temp.y << " z : " << temp.z << std::endl;
+
+        std::cout << "------------------------" << std::endl;
+
+     // Initialisez les compteurs
+    int countChol = 0;
+    int countDppc = 0;
+
+    // Parcourez le vecteur des molécules
+    for (const Molecule& molecule : allMolecules) {
+        if (molecule.name.find("DPPC") != std::string::npos) {
+            countDppc +=1;
+        } else if (molecule.name.find("CHOL") != std::string::npos) {
+            countChol +=1;
+        }
+    }
+
+    // Affichez les résultats
+    std::cout << "Nombre total de DPPC : " << countDppc << std::endl;
+    std::cout << "Nombre total de CHOL : " << countChol << std::endl;
+    // Imprimez le nombre de molécules
+    std::cout << "Number of molecules: " << allMolecules.size() << std::endl;
+    saveMoleculesToFile(allMolecules, "molecule.txt");
+}
