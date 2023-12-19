@@ -1,9 +1,9 @@
 CXX = g++
-CXXFLAGS = -std=c++17
+CXXFLAGS = -std=c++17 -Ofast
 SRC_DIR = src/sources
 INC_DIR = src/headers
 
-SRC = $(SRC_DIR)/Atom.cpp $(SRC_DIR)/fcts.cpp $(SRC_DIR)/groReader.cpp $(SRC_DIR)/garfieldSolver.cpp main.cpp
+SRC = $(SRC_DIR)/Atom.cpp $(SRC_DIR)/groReader.cpp $(SRC_DIR)/garfieldSolver.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 EXE = LipidX
 

@@ -26,23 +26,27 @@ void getMeanY(std::vector<Atom> atoms, garfieldSlice *slice) {
     //garfieldSlice result;
 }
 
-void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice) {
+void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2) {
     int supcount = 0,infcount = 0;
     for (int i = 0; i<atoms.size();i++) {
         Atom atom = atoms[i];
         if (atom.x <= slice->maxX && atom.x >= slice->minX) {
             if(atom.y > slice->meanY) {
                 supcount+=1;
-                std::cout << "Name : " << atom.name << " Layer sup" << std::endl;
-            } else
+                //std::cout << "Name : " << atom.name << " Layer sup" << std::endl;
+                atomsL1->push_back(atom);
+            } else {
                 infcount+=1;
-                std::cout << "Name : " << atom.name << " Layer inf" << std::endl;
+                //std::cout << "Name : " << atom.name << " Layer inf" << std::endl;
+                atomsL2->push_back(atom);
+            }
+                
         }
     }
-    //printf("feuillet sup : %d, feuillet inf : %d\n",supcount,infcount);
+    printf("feuillet sup : %d, feuillet inf : %d\n",supcount,infcount);
 }
 
-void GarfieldLoop(garfield garf,std::vector<Atom> atoms) {
+void GarfieldLoop(garfield garf,std::vector<Atom> atoms,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2) {
 
     garf.slices.resize(garf.numSlices);
 
@@ -69,7 +73,7 @@ void GarfieldLoop(garfield garf,std::vector<Atom> atoms) {
         garf.slices[i].minX = (i*garf.sliceWidth)-abs(minX);
         getMeanY(atoms,&garf.slices[i]);
         std::cout << "Tranche : " << i << " début :" << garf.slices[i].minX << " fin : "<< garf.slices[i].maxX << " moyenne en Y : " << garf.slices[i].meanY << std::endl;
-        sortAtoms(atoms,&garf.slices[i]);
+        sortAtoms(atoms,&garf.slices[i],atomsL1,atomsL2);
         
     }
 }
