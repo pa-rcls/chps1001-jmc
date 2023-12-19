@@ -39,3 +39,78 @@ vector<Atom> readGroFile(const string& filename) {
     file.close(); //don't forget to close file !
     return atoms;
 }
+
+
+void check_solution(vector<Atom> *layer1, vector<Atom> *layer2, char *path) {
+	vector<int> leaflet1 = vector<int>();
+	vector<int> leaflet2 = vector<int>();
+	
+	// Récupération du chemin vers le fichier leaflets.txt
+	char leaflet_path[256];
+	memcpy(leaflet_path, path, strrchr(path, '/') - path + 1 );
+	strcat(leaflet_path, "leaflets.txt");
+	
+	filebuf fb;
+	fb.open(leaflet_path, ios::in);
+	
+	char str[256];
+	
+	istream in(&fb);
+	
+	// On ignore la première ligne
+	in.getline(str, 256);
+	char *tmp;
+	
+	// Lecture de la première couche
+	in.getline(str, 256);
+	while(str[0] != '[') {
+		
+		tmp = strtok(str, " ");
+		while(tmp != NULL) {
+			leaflet1.push_back(atoi(tmp));
+			tmp = strtok(NULL, " ");
+		}
+		
+		in.getline(str, 256);
+	}
+	
+	// Lecture de la seconde couche
+	in.getline(str, 256);
+	while(!in.eof()) {
+		
+		tmp = strtok(str, " ");
+		while(tmp != NULL) {
+			leaflet2.push_back(atoi(tmp));
+			tmp = strtok(NULL, " ");
+		}
+		
+		in.getline(str, 256);
+	}
+	
+	fb.close();
+	
+	// Comparaison des deux couches avec le fichier leaflet
+	if( ( compare_vector(layer1, &leaflet1) || compare_vector(layer1, &leaflet2) )
+	 && ( compare_vector(layer2, &leaflet1) || compare_vector(layer2, &leaflet2) ) ) {
+		printf("La solution obtenue correspond à la solution de référence\n");
+	}
+	else {
+		printf("La solution obtenue ne correspond pas à la solution de référence\n");
+	}
+}
+
+
+int compare_vector(vector<Atom> *layer, vector<int> *leaflet) {
+	for(int i=0; i < leaflet->size(); ++i) {
+		int found = 0;
+		for(int j=0; j<layer->size() && !found; ++j) {
+			if( (*leaflet)[i] == atoi( (*layer)[j].name.substr(0, (*layer)[i].name.size() - 4).c_str() )) {
+				found = 1;
+			}
+		}
+		if(!found) {
+			return 0;
+		}
+	}
+	return 1;
+}
