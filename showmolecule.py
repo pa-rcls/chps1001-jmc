@@ -1,39 +1,33 @@
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
-def read_molecule_file(file_path):
+# Fonction pour lire les données du fichier
+def lire_fichier_molecules(nom_fichier):
     molecules = []
-    with open(file_path, 'r') as file:
-        molecule = {}
-        for line in file:
-            if line.startswith('Molecule Name:'):
-                molecule['name'] = line.split(': ')[1].strip()
-            elif line.startswith('Molecule ID:'):
-                molecule['id'] = int(line.split(': ')[1].strip())
-            elif line.startswith('Center of Mass:'):
-                coordinates = line.split(': ')[1].strip().split()
-                molecule['x'] = float(coordinates[1])
-                molecule['y'] = float(coordinates[3])
-                molecule['z'] = float(coordinates[5])
-            elif line.startswith('------------------------'):
-                molecules.append(molecule)
-                molecule = {}
+    with open(nom_fichier, 'r') as fichier:
+        for ligne in fichier:
+            elements = ligne.split()
+            nom_molecule = elements[0]
+            position = [float(x) for x in elements[1:4:2]]  # Utilisez les valeurs x et z
+            feuillet = int(elements[4])
+            molecules.append((nom_molecule, position, feuillet))
     return molecules
 
-def plot_molecules(molecules):
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+# Fonction pour afficher les molécules dans un plot 2D avec des couleurs différentes pour chaque feuillet
+def afficher_molecules_2d_xz(molecules):
+    plt.figure()
 
-    for molecule in molecules:
-        ax.scatter(molecule['x'], molecule['y'], molecule['z'], label=f"{molecule['name']} (ID: {molecule['id']})")
+    for molécule, position, feuillet in molecules:
+        if feuillet == 1:
+            plt.scatter(position[0], position[1], c='red', label='Feuillet 1')
+        elif feuillet == 0:
+            plt.scatter(position[0], position[1], c='blue', label='Feuillet 0')
 
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-
+    plt.xlabel('X')
+    plt.ylabel('Z')
     plt.show()
 
-if __name__ == "__main__":
-    file_path = "output.txt"  # Remplacez par le chemin de votre fichier
-    molecules = read_molecule_file(file_path)
-    plot_molecules(molecules)
+# Lecture des molécules depuis le fichier
+molecules = lire_fichier_molecules('molecule.txt')
+
+# Affichage des molécules dans un plot 2D avec les valeurs x et z
+afficher_molecules_2d_xz(molecules)
