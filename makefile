@@ -1,7 +1,8 @@
 CXX = g++
-CXXFLAGS = -std=c++17
+CXXFLAGS = -std=c++17 -Ofast
 SRC_DIR = src/sources
 INC_DIR = src/headers
+
 
 SRC = $(wildcard $(SRC_DIR)/*.cpp) main.cpp
 OBJ = $(SRC:.cpp=.o)

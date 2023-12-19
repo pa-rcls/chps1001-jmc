@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#include <set>
-#include "src/headers/fcts.h"
 #include "src/headers/groReader.h"
 #include "src/headers/garfieldSolver.h"
 //#include "src/headers/Atom.h"
@@ -14,13 +12,18 @@
 
 
 int main(int argc, char* argv[]) {
-    // helloWorld();
 
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <gro_file.gro>" << std::endl;
         return 1;
     }
 
+    std::string groFileName = argv[1]; // Récupère le nom du fichier .gro à partir des arguments de la ligne de commande
+    std::vector<Atom> atoms = readGroFile(groFileName);
+    std::cout << "Atoms length: " << atoms.size() << std::endl;
+    std::vector<Atom> atomsL1;
+    std::vector<Atom> atomsL2;
+    // Génère un nombre aléatoire entre 0 (inclus) et atoms.size() (exclus)
     // std::string groFileName = argv[1]; // Récupère le nom du fichier .gro à partir des arguments de la ligne de commande
     // std::vector<Atom> atoms = readGroFile(groFileName);
 
@@ -35,6 +38,13 @@ int main(int argc, char* argv[]) {
 
     // atoms[randomIndex].show();
     // Utilisez les données lues à partir du fichier .gro dans votre analyse de la structure des membranes lipidiques
+    garfield garf;
+    garf.numSlices = 5;
+    GarfieldLoop(garf,atoms,&atomsL1,&atomsL2);
+    std::cout << atomsL1.size() + atomsL2.size();
+    writeGroFile(groFileName,&atomsL1,&atomsL2);
+    return 0;
+
 	// double tick = clock();
     // garfield garf;
     // garf.numSlices = 5;

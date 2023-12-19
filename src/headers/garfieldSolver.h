@@ -15,9 +15,9 @@ struct garfield {
     float sliceWidth;
 };
 
-void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice);
-void getMeanY(std::vector<Atom> atoms, garfieldSlice *slice);
-void GarfieldLoop(garfield GSData,std::vector<Atom> atoms);
+void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2);
+void getMeanY(const std::vector<Atom> *atoms, garfieldSlice *slice);
+void GarfieldLoop(garfield GSData,std::vector<Atom> atoms,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2);
 
 
 
