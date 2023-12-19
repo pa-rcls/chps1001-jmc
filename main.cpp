@@ -21,8 +21,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // std::string groFileName = argv[1]; // Récupère le nom du fichier .gro à partir des arguments de la ligne de commande
-    // std::vector<Atom> atoms = readGroFile(groFileName);
+     std::string groFileName = argv[1]; // Récupère le nom du fichier .gro à partir des arguments de la ligne de commande
+     std::vector<Atom> atoms = readGroFile(groFileName);
 
     
     // std::cout << "Atoms length: " << atoms.size() << std::endl;

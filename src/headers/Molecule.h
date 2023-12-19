@@ -39,5 +39,5 @@ Vector3D calculateMedianPosition(const std::vector<Molecule>& molecules);
 Vector3D calculateAveragePosition(const std::vector<Molecule>& molecules);
 void assignFeuilletValues(std::vector<Molecule>& molecules);
 
-void solveurmolecule(const std::vector<Atom>& atoms);s
+void solveurmolecule(const std::vector<Atom>& atoms);
 #endif // MOLECULE_H
