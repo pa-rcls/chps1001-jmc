@@ -1,12 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <cstdlib>
 #include <ctime>
 
+#include <set>
 #include "src/headers/fcts.h"
 #include "src/headers/groReader.h"
 #include "src/headers/garfieldSolver.h"
 //#include "src/headers/Atom.h"
+#include "src/headers/Molecule.h"
 #include "src/headers/graph.h"
 
 
@@ -23,8 +26,8 @@ int main(int argc, char* argv[]) {
 
     
     // std::cout << "Atoms length: " << atoms.size() << std::endl;
-    
-    // Génère un nombre aléatoire entre 0 (inclus) et atoms.size() (exclus)
+   
+  // Génère un nombre aléatoire entre 0 (inclus) et atoms.size() (exclus)
     // std::random_device rd;
     // std::mt19937 gen(rd());
     // std::uniform_int_distribution<int> distribution(0, atoms.size() - 1);
@@ -50,6 +53,6 @@ int main(int argc, char* argv[]) {
 	
 	double tock = clock();
 	cout << (tock-tick)/CLOCKS_PER_SEC << "s" << endl;
-	
-    return 0;
+  
+  return 0;
 }

@@ -29,6 +29,7 @@ vector<Atom> readGroFile(const string& filename) {
         Atom atom;
         file >> atom.name >> atom.atomType >> atom.id >> atom.x >> atom.y >> atom.z;
         if (atom.name.find("DPPC") != std::string::npos || 
+            atom.name.find("DUPC") != std::string::npos ||
             atom.name.find("CHOL") != std::string::npos || 
             atom.name.find("POPC") != std::string::npos) {
             atoms.push_back(atom);

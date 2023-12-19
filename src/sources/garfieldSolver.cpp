@@ -1,4 +1,4 @@
-#include "GarfieldSolver.h"
+#include "garfieldSolver.h"
 #include <iostream>
 
 void getMeanY(std::vector<Atom> atoms, garfieldSlice *slice) {
