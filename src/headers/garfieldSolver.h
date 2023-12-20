@@ -5,7 +5,7 @@
 #include <vector>
 
 struct garfieldSlice {
-    float meanY = 0;
+    float meanZ = 0;
     float maxX;
     float minX;
 };
@@ -16,7 +16,7 @@ struct garfield {
 };
 
 void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2);
-void getMeanY(const std::vector<Atom> *atoms, garfieldSlice *slice);
+void getMeanZ(const std::vector<Atom> *atoms, garfieldSlice *slice);
 void GarfieldLoop(garfield GSData,std::vector<Atom> atoms,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2);
 
 

@@ -1,10 +1,10 @@
 #include "graph.h"
 
 
-void init_graph(graph_t *graph, char *path) {
+void init_graph(graph_t *graph,const char *path) {
 	// Variables locales
 	unsigned int i, j, index;
-	
+	std::cout << path << std::endl;
 	// Récupération de l'ensemble des atomes du fichier
 	vector<Atom> temp = readGroFile(path);
 	cout << "Nombre d'atomes dans le fichier : " << temp.size() << endl;

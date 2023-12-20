@@ -1,5 +1,5 @@
 # Ignore les fichiers objets générés par la compilation
 *.o
-
+*.png
 # Ignore les fichiers exécutables générés
 LipidX

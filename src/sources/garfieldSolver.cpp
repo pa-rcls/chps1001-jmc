@@ -1,9 +1,9 @@
 #include "garfieldSolver.h"
 #include <iostream>
 
-void getMeanY(std::vector<Atom> atoms, garfieldSlice *slice) {
+void getmeanZ(std::vector<Atom> atoms, garfieldSlice *slice) {
     int atomCount = 0;
-    slice->meanY = 0;
+    slice->meanZ = 0;
     std::string userInput;
     //printf("atomX : %f maxx : %f minx : %f \n",atoms[0].x,slice->maxX,slice->minX);
     for (int i = 0; i<atoms.size();i++) {
@@ -15,14 +15,14 @@ void getMeanY(std::vector<Atom> atoms, garfieldSlice *slice) {
             // std::getline(std::cin, userInput);
             //printf("zzz\n");
             atomCount++;
-            slice->meanY+=atom.y;
-            //printf("%f\n",slice->meanY);
+            slice->meanZ+=atom.z;
+            //printf("%f\n",slice->meanZ);
         }
 
     }
     // std::cout << "AtomCount :" << atomCount << std::endl;
-    // printf("%f",slice->meanY/atomCount);
-    slice->meanY = slice->meanY/atomCount;
+    // printf("%f",slice->meanZ/atomCount);
+    slice->meanZ = slice->meanZ/atomCount;
     //garfieldSlice result;
 }
 
@@ -31,7 +31,7 @@ void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice,std::vector<Atom> *
     for (int i = 0; i<atoms.size();i++) {
         Atom atom = atoms[i];
         if (atom.x <= slice->maxX && atom.x >= slice->minX) {
-            if(atom.y > slice->meanY) {
+            if(atom.z > slice->meanZ) {
                 supcount+=1;
                 //std::cout << "Name : " << atom.name << " Layer sup" << std::endl;
                 atomsL1->push_back(atom);
@@ -71,8 +71,8 @@ void GarfieldLoop(garfield garf,std::vector<Atom> atoms,std::vector<Atom> *atoms
         printf("\n\n");
         garf.slices[i].maxX = ((i+1)*garf.sliceWidth)-abs(minX);
         garf.slices[i].minX = (i*garf.sliceWidth)-abs(minX);
-        getMeanY(atoms,&garf.slices[i]);
-        std::cout << "Tranche : " << i << " début :" << garf.slices[i].minX << " fin : "<< garf.slices[i].maxX << " moyenne en Y : " << garf.slices[i].meanY << std::endl;
+        getmeanZ(atoms,&garf.slices[i]);
+        std::cout << "Tranche : " << i << " début :" << garf.slices[i].minX << " fin : "<< garf.slices[i].maxX << " moyenne en X : " << garf.slices[i].meanZ << std::endl;
         sortAtoms(atoms,&garf.slices[i],atomsL1,atomsL2);
         
     }

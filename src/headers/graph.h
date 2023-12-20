@@ -32,7 +32,7 @@ typedef struct {
 	vector<Atom> layer2;
 } graph_t;
 
-void init_graph(graph_t *, char *);
+void init_graph(graph_t *, const char *);
 
 void free_graph(graph_t *);
 

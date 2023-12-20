@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Ofast
+CXXFLAGS = -std=c++17
 SRC_DIR = src/sources
 INC_DIR = src/headers
 
