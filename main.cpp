@@ -17,12 +17,15 @@ int main(int argc, char* argv[]) {
     std::string groFileName = "none";
 	std::string solver = "Graph";
 	int numSlices = 5;
+
+
 	if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " -source=<gro_file.gro> " << " [-solver=[Graph][GF][AM]] " << " [-n_slices=[number_of_slices_for_Garfield_Solver]] "<< std::endl;
         std::cerr << "Default values : " << "-solver=Graph " << "-n_slices=5 " << std::endl;
         return 1;
     }
 
+	//Checking for arguments
 	for (int i=0;i<argc;i++) {
 		std::string argument = argv[i];
 		//Check if argument is for gro file
@@ -53,9 +56,13 @@ int main(int argc, char* argv[]) {
 		}
 
 	}
-	std::cout << "Source = " << groFileName << " Solver = " << solver << "nSlices = " << numSlices << std::endl; 
+
+	
+	std::cout << "Source = " << groFileName << " Solver = " << solver << " nSlices = " << numSlices << std::endl; 
+	std::cout << "-----------------------------------------" << std::endl;
 
 
+	//Reading the gro file
 	std::vector<Atom> atoms = readGroFile(groFileName);
 	if (groFileName == "none" || atoms.size() == 0) {
 		std::cout << "Error while reading gro file. Aborting" << std::endl;
@@ -66,10 +73,11 @@ int main(int argc, char* argv[]) {
     std::vector<Atom> atomsL2;
 
 
+
+	//Starting Solving problem
 	double tick = clock();
 
-	if (solver == "Graph") {
-		//Graph Solver		
+	if (solver == "Graph") { //If Graph is the selected Solver	
 		graph_t graph;
 		init_graph(&graph, groFileName.c_str());
 		
@@ -78,7 +86,7 @@ int main(int argc, char* argv[]) {
 		
 		free_graph(&graph);
 
-	} else if (solver == "GS") {
+	} else if (solver == "GS") { //If GrafieldSolver is the selected Solver	
 
 		garfield garf;
 		garf.numSlices = numSlices;
@@ -87,13 +95,15 @@ int main(int argc, char* argv[]) {
 		check_solution(&atomsL1, &atomsL2, groFile);
 		writeGroFile(groFileName,&atomsL1,&atomsL2);
 
-	} else if (solver == "AM") {
+	} else if (solver == "AM") { //If AM is the selected Solver	
 		solveurmolecule(atoms);
 	} else {
 		std::cout << solver <<  " : solver unreconized. Aborting" << std::endl;
 	}
 
 
+
+	//Compute time taken by the solver
 	double tock = clock();
 	std::cout << "Time in Solver : " << (tock-tick)/CLOCKS_PER_SEC << "s" << std::endl;
 

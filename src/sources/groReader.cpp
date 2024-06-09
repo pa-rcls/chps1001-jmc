@@ -7,6 +7,7 @@
 
 string frame;
 
+//extract atoms from gro file 
 vector<Atom> readGroFile(const string& filename) {
     vector<Atom> atoms;
 
@@ -53,6 +54,7 @@ vector<Atom> readGroFile(const string& filename) {
     return atoms;
 }
 
+//write solution in a gro file format
 void writeGroFile(const string& filename,const vector<Atom> * atomsL1,const vector<Atom> * atomsL2) {
     //std::cout << frame << std::endl;
     //std::cout << filename;
@@ -84,6 +86,7 @@ void writeGroFile(const string& filename,const vector<Atom> * atomsL1,const vect
 
 }
 
+//check if solution matches the reference solution
 void check_solution(vector<Atom> *layer1, vector<Atom> *layer2, char *path) {
     vector<int> leaflet1 = vector<int>();
     vector<int> leaflet2 = vector<int>();

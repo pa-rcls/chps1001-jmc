@@ -1,31 +1,24 @@
 #include "garfieldSolver.h"
 #include <iostream>
 
+//Getting the mean in Z dimension for all slices
 void getmeanZ(std::vector<Atom> atoms, garfieldSlice *slice) {
     int atomCount = 0;
     slice->meanZ = 0;
     std::string userInput;
-    //printf("atomX : %f maxx : %f minx : %f \n",atoms[0].x,slice->maxX,slice->minX);
     for (int i = 0; i<atoms.size();i++) {
         Atom atom = atoms[i];
 
         if (atom.x <= slice->maxX && atom.x >= slice->minX) {
-            // std::cout << "YES Atom : " << atom.name << "x : " << atom.x << "minX : " << slice->minX << "maxX" << slice->maxX <<std::endl;
-            // std::cout << "Entrez quelque chose : ";
-            // std::getline(std::cin, userInput);
-            //printf("zzz\n");
             atomCount++;
             slice->meanZ+=atom.z;
-            //printf("%f\n",slice->meanZ);
         }
 
     }
-    // std::cout << "AtomCount :" << atomCount << std::endl;
-    // printf("%f",slice->meanZ/atomCount);
     slice->meanZ = slice->meanZ/atomCount;
-    //garfieldSlice result;
 }
 
+//Sorting atoms between the two layers
 void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2) {
     int supcount = 0,infcount = 0;
     for (int i = 0; i<atoms.size();i++) {
@@ -46,6 +39,7 @@ void sortAtoms(std::vector<Atom> atoms, garfieldSlice *slice,std::vector<Atom> *
     printf("feuillet sup : %d, feuillet inf : %d\n",supcount,infcount);
 }
 
+//Solver's main loop
 void GarfieldLoop(garfield garf,std::vector<Atom> atoms,std::vector<Atom> *atomsL1,std::vector<Atom> *atomsL2) {
 
     garf.slices.resize(garf.numSlices);
